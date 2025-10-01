@@ -4,6 +4,8 @@ import br.com.HabitTracker.controller.contract.HabitControllerContract;
 import br.com.HabitTracker.service.HabitService;
 import br.com.HabitTracker.valueObject.HabitVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,26 @@ public class HabitController implements HabitControllerContract {
     }
 
     @Override
-    public ResponseEntity<HabitVO> getHabitById(String id) {
+    public ResponseEntity<HabitVO> findHabitById(String id) {
         HabitVO habitById = habitService.findHabitById(id);
         return ResponseEntity.ok(habitById);
+    }
+
+    @Override
+    public ResponseEntity<HabitVO> updateHabit(String id, HabitVO habitVO) {
+        HabitVO updatedHabit = habitService.updateHabit(id, habitVO);
+        return ResponseEntity.ok(updatedHabit);
+    }
+
+    @Override
+    public ResponseEntity<Page<HabitVO>> findAllHabits(Pageable pageable) {
+        Page<HabitVO> allHabits = habitService.findAllHabits(pageable);
+        return ResponseEntity.ok(allHabits);
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteHabit(String id) {
+        habitService.deleteHabit(id);
+        return ResponseEntity.noContent().build();
     }
 }
