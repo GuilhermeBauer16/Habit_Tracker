@@ -1,9 +1,10 @@
 package br.com.HabitTracker.service.contract;
 
-import br.com.HabitTracker.entity.HabitEntity;
+import br.com.HabitTracker.valueObject.HabitVO;
 
 public interface HabitServiceContract {
 
-    HabitEntity createHabit(HabitEntity habit);
-    HabitEntity findHabitById(String id);
+    HabitVO createHabit(HabitVO habitVO);
+
+    HabitVO findHabitById(String id);
 }

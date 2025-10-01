@@ -1,8 +1,8 @@
 package br.com.HabitTracker.controller;
 
 import br.com.HabitTracker.controller.contract.HabitControllerContract;
-import br.com.HabitTracker.entity.HabitEntity;
 import br.com.HabitTracker.service.HabitService;
+import br.com.HabitTracker.valueObject.HabitVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +21,14 @@ public class HabitController implements HabitControllerContract {
     }
 
     @Override
-    public ResponseEntity<HabitEntity> createHabit(HabitEntity habit) {
-        HabitEntity habitEntity = habitService.createHabit(habit);
-        return new ResponseEntity<>(habitEntity, HttpStatus.CREATED);
+    public ResponseEntity<HabitVO> createHabit(HabitVO habitVO) {
+        HabitVO createdHabit = habitService.createHabit(habitVO);
+        return new ResponseEntity<>(createdHabit, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<HabitEntity> getHabitById(String id) {
-        HabitEntity habitById = habitService.findHabitById(id);
+    public ResponseEntity<HabitVO> getHabitById(String id) {
+        HabitVO habitById = habitService.findHabitById(id);
         return ResponseEntity.ok(habitById);
     }
 }
